@@ -101,7 +101,6 @@
                 <p class="text-lg max-w-2xl mx-auto mb-10 text-slate-400 hero-text">
                     Upscale your images by up to 400% with our smart browser-based engine. 
                     <br class="hidden md:block" />
-                    <!-- Updated with dark: modifier -->
                     <span class="text-indigo-600 dark:text-indigo-400 font-medium">Images are processed locally on your device and never uploaded to a server.</span>
                 </p>
             </div>
@@ -319,7 +318,8 @@
             <h2 class="text-3xl font-bold mb-4 text-white section-title">Get in Touch</h2>
             <p class="mb-8 max-w-lg mx-auto text-slate-400 section-text">Have questions? We're here to help.</p>
             
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=afrin220797@gmail.com" target="_blank" class="inline-flex items-center gap-3 bg-indigo-600/10 border border-indigo-500/50 text-indigo-600 px-8 py-4 rounded-2xl hover:bg-indigo-600 hover:text-white transition-all duration-300 group">
+            <!-- Email Link with ID for JS targeting -->
+            <a id="email-link" href="mailto:afrin220797@gmail.com" class="inline-flex items-center gap-3 bg-indigo-600/10 border border-indigo-500/50 text-indigo-600 px-8 py-4 rounded-2xl hover:bg-indigo-600 hover:text-white transition-all duration-300 group">
                 <i data-lucide="mail" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                 <span class="font-medium">afrin220797@gmail.com</span>
             </a>
@@ -745,6 +745,23 @@
         window.scrollToId = (id) => {
             document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
         };
+
+        // --- Responsive Email Link Logic ---
+        (function() {
+            const emailLink = document.getElementById('email-link');
+            if (emailLink) {
+                // Simple check for mobile devices
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                
+                if (!isMobile) {
+                    // On Desktop, swap to the robust Google Mail web link so it opens in a new tab
+                    // instead of trying to open a desktop mail client (Outlook/Mail)
+                    emailLink.href = "https://mail.google.com/mail/?view=cm&fs=1&to=afrin220797@gmail.com";
+                    emailLink.target = "_blank";
+                    emailLink.rel = "noopener noreferrer";
+                }
+            }
+        })();
 
     </script>
 </body>
